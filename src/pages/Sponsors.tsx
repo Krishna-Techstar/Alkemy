@@ -1,34 +1,44 @@
 import { motion } from 'framer-motion';
 import { Download, Mail } from 'lucide-react';
+import { useState, useEffect } from 'react';
 import Navbar from '@/components/Navbar';
 import ParticleBackground from '@/components/ParticleBackground';
 import GlitchText from '@/components/GlitchText';
 import NeonButton from '@/components/NeonButton';
 import Footer from '@/components/Footer';
+import { Skeleton } from '@/components/ui/skeleton';
+
+const categories = ['technology', 'gaming', 'music', 'sports', 'neon'];
 
 const sponsors = [
   {
     tier: 'PLATINUM',
+    color: '#9B5DE5',
+    glowColor: 'hsla(265, 75%, 67%, 0.6)',
     companies: [
-      { name: 'TechCorp', logo: 'https://via.placeholder.com/200x80/1a1a2e/9B5DE5?text=TechCorp' },
-      { name: 'InnovateLabs', logo: 'https://via.placeholder.com/200x80/1a1a2e/9B5DE5?text=InnovateLabs' },
+      { name: 'TechCorp', category: 'technology', website: 'https://techcorp.example.com' },
+      { name: 'InnovateLabs', category: 'technology', website: 'https://innovatelabs.example.com' },
     ],
   },
   {
     tier: 'GOLD',
+    color: '#FF2B2B',
+    glowColor: 'hsla(0, 100%, 56%, 0.6)',
     companies: [
-      { name: 'FutureTech', logo: 'https://via.placeholder.com/180x70/1a1a2e/FF2B2B?text=FutureTech' },
-      { name: 'CyberNet', logo: 'https://via.placeholder.com/180x70/1a1a2e/FF2B2B?text=CyberNet' },
-      { name: 'QuantumAI', logo: 'https://via.placeholder.com/180x70/1a1a2e/FF2B2B?text=QuantumAI' },
+      { name: 'FutureTech', category: 'gaming', website: 'https://futuretech.example.com' },
+      { name: 'CyberNet', category: 'neon', website: 'https://cybernet.example.com' },
+      { name: 'QuantumAI', category: 'technology', website: 'https://quantumai.example.com' },
     ],
   },
   {
     tier: 'SILVER',
+    color: '#00F5D4',
+    glowColor: 'hsla(168, 100%, 48%, 0.6)',
     companies: [
-      { name: 'DevHub', logo: 'https://via.placeholder.com/160x60/1a1a2e/00F5D4?text=DevHub' },
-      { name: 'CodeBase', logo: 'https://via.placeholder.com/160x60/1a1a2e/00F5D4?text=CodeBase' },
-      { name: 'ByteWorks', logo: 'https://via.placeholder.com/160x60/1a1a2e/00F5D4?text=ByteWorks' },
-      { name: 'DataFlow', logo: 'https://via.placeholder.com/160x60/1a1a2e/00F5D4?text=DataFlow' },
+      { name: 'DevHub', category: 'music', website: 'https://devhub.example.com' },
+      { name: 'CodeBase', category: 'technology', website: 'https://codebase.example.com' },
+      { name: 'ByteWorks', category: 'gaming', website: 'https://byteworks.example.com' },
+      { name: 'DataFlow', category: 'sports', website: 'https://dataflow.example.com' },
     ],
   },
 ];
@@ -40,11 +50,29 @@ const tierColors: Record<string, { text: string; border: string; glow: string }>
 };
 
 const Sponsors = () => {
+  const [currentSponsorIndex, setCurrentSponsorIndex] = useState(0);
+
+  // Flatten all sponsors
+  const allSponsors = sponsors.flatMap(tier => tier.companies);
+
+  // Auto-rotate sponsors
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentSponsorIndex(prev => (prev + 1) % allSponsors.length);
+    }, 3000);
+    return () => clearInterval(interval);
+  }, [allSponsors.length]);
+
   return (
     <div className="relative min-h-screen bg-deep-space">
       {/* Background */}
-      <div className="fixed inset-0 z-0">
-        <div className="absolute inset-0 bg-gradient-to-b from-deep-space via-midnight-navy to-deep-space" />
+      <div 
+        className="fixed inset-0 z-0 bg-cover bg-center bg-no-repeat"
+        style={{
+          backgroundImage: 'url(public/images/sponsor-bg.png)',
+        }}
+      >
+        <div className="absolute inset-0 bg-black/50" />
       </div>
 
       <ParticleBackground />
@@ -75,7 +103,7 @@ const Sponsors = () => {
             return (
               <motion.section
                 key={tier.tier}
-                className="mb-16"
+                className="mb-20"
                 initial={{ opacity: 0 }}
                 whileInView={{ opacity: 1 }}
                 viewport={{ once: true }}
@@ -83,7 +111,7 @@ const Sponsors = () => {
               >
                 {/* Tier Title */}
                 <motion.div
-                  className="text-center mb-8"
+                  className="text-center mb-12"
                   initial={{ opacity: 0, scale: 0.9 }}
                   whileInView={{ opacity: 1, scale: 1 }}
                   viewport={{ once: true }}
@@ -94,43 +122,57 @@ const Sponsors = () => {
                   <div className={`w-32 h-px ${colors.border.replace('border-', 'bg-')}/50 mx-auto mt-2`} />
                 </motion.div>
 
-                {/* Logos Carousel/Grid */}
-                <div className="relative overflow-hidden py-8">
-                  <motion.div
-                    className="flex gap-8 justify-center flex-wrap"
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                  >
-                    {tier.companies.map((company, companyIndex) => (
-                      <motion.div
-                        key={company.name}
-                        className={`glass-panel p-6 border ${colors.border}/30 hover:${colors.border} transition-all duration-500 group`}
-                        initial={{ opacity: 0, scale: 0.8 }}
-                        whileInView={{ opacity: 1, scale: 1 }}
-                        viewport={{ once: true }}
-                        transition={{ delay: companyIndex * 0.1 }}
-                        whileHover={{ 
-                          scale: 1.05, 
-                          boxShadow: tier.tier === 'PLATINUM' 
-                            ? '0 0 30px hsla(265, 75%, 67%, 0.5)' 
-                            : tier.tier === 'GOLD'
-                            ? '0 0 30px hsla(0, 100%, 56%, 0.5)'
-                            : '0 0 30px hsla(168, 100%, 48%, 0.5)'
-                        }}
-                      >
-                        <img
-                          src={company.logo}
-                          alt={company.name}
-                          className="h-12 md:h-16 w-auto object-contain grayscale group-hover:grayscale-0 transition-all duration-500"
-                        />
-                      </motion.div>
-                    ))}
-                  </motion.div>
+                {/* TV Grid */}
+                <div className="flex justify-center gap-12 flex-wrap">
+                  {tier.companies.map((company, companyIndex) => (
+                    <RetroTV 
+                      key={company.name}
+                      company={company}
+                      color={tier.color}
+                      glowColor={tier.glowColor}
+                    />
+                  ))}
                 </div>
               </motion.section>
             );
           })}
+
+          {/* Rolling Sponsor TV */}
+          <motion.section
+            className="my-20"
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+          >
+            <motion.div
+              className="text-center mb-12"
+              initial={{ opacity: 0, scale: 0.9 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+            >
+              <h2 className="font-display text-2xl md:text-3xl text-neon-red tracking-widest">
+                FEATURED SPONSOR
+              </h2>
+              <div className="w-32 h-px bg-neon-red/50 mx-auto mt-2" />
+            </motion.div>
+
+            {/* Rolling TV */}
+            <div className="flex justify-center">
+              <motion.div
+                key={currentSponsorIndex}
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.9 }}
+                transition={{ duration: 0.5 }}
+              >
+                <RetroTV 
+                  company={allSponsors[currentSponsorIndex]}
+                  color="#FF2B2B"
+                  glowColor="hsla(0, 100%, 56%, 0.6)"
+                />
+              </motion.div>
+            </div>
+          </motion.section>
 
           {/* CTA Section */}
           <motion.div
@@ -167,6 +209,106 @@ const Sponsors = () => {
 
       <Footer />
     </div>
+  );
+};
+const RetroTV = ({ company, color, glowColor }: { company: { name: string; category: string; website: string }; color: string; glowColor: string }) => {
+  const [isLoading, setIsLoading] = useState(true);
+  const [imageError, setImageError] = useState(false);
+
+  const unsplashUrl = `https://source.unsplash.com/600x400/?${company.category}&sig=${company.name}`;
+  const fallbackUrl = `https://via.placeholder.com/600x400/0b1026/${color.slice(1)}?text=${company.name}`;
+
+  const handleClick = () => {
+    window.open(company.website, '_blank');
+  };
+
+  return (
+    <motion.div
+      className="relative w-[380px] mx-auto cursor-pointer"
+      initial={{ opacity: 0, scale: 0.9 }}
+      whileInView={{ opacity: 1, scale: 1 }}
+      viewport={{ once: true }}
+      whileHover={{ scale: 1.08 }}
+      onClick={handleClick}
+    >
+      {/* Glow */}
+      <div
+        className="absolute inset-8 rounded-2xl blur-3xl opacity-80 -z-10 transition-all duration-300 hover:blur-2xl"
+        style={{ backgroundColor: glowColor }}
+      />
+
+      {/* TV Container */}
+      <div className="relative flex flex-col items-center justify-center">
+
+        {/* SCREEN CONTENT */}
+        <div
+          className="absolute"
+          style={{
+            top: "10.5%",
+            left: "15%",
+            width: "60%",
+            height: "65%",
+            borderRadius: "10px",
+            overflow: "hidden",
+            boxShadow: `0 0 50px ${glowColor}, inset 0 0 40px ${glowColor}`,
+            border: `2px solid ${color}`,
+          }}
+        >
+          {/* Scanlines */}
+          <div
+            className="absolute inset-0 pointer-events-none opacity-25 z-20"
+            style={{
+              backgroundImage:
+                "repeating-linear-gradient(0deg, rgba(255,255,255,0.04) 0px, rgba(255,255,255,0.04) 1px, transparent 1px, transparent 3px)",
+            }}
+          />
+
+          {/* Loading */}
+          {isLoading && (
+            <div className="absolute inset-0 bg-black flex items-center justify-center">
+              <Skeleton className="w-full h-full" />
+            </div>
+          )}
+
+          {/* Image */}
+          <img
+            src={imageError ? fallbackUrl : unsplashUrl}
+            alt={company.name}
+            onLoad={() => setIsLoading(false)}
+            onError={() => {
+              setIsLoading(false);
+              setImageError(true);
+            }}
+            className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-700 ${
+              isLoading ? "opacity-0" : "opacity-100"
+            }`}
+          />
+
+          {/* Flicker Line */}
+          <motion.div
+            className="absolute left-0 w-full h-[3px] z-30"
+            style={{ backgroundColor: color, opacity: 0.8 }}
+            animate={{ top: ["0%", "100%"] }}
+            transition={{ duration: 2.5, repeat: Infinity, ease: "linear" }}
+          />
+        </div>
+
+        {/* TV FRAME */}
+        <img
+          src="/images/TVFINAL.png"
+          className="relative w-full pointer-events-none select-none"
+          alt="Retro TV Frame"
+        />
+      </div>
+
+      {/* Company Name */}
+      <p
+        className="text-center mt-6 text-base md:text-lg font-retro tracking-widest uppercase font-bold hover:text-opacity-80 transition-all"
+        style={{ color }}
+      >
+        {company.name}
+      </p>
+    </motion.div>
   );
 };
 

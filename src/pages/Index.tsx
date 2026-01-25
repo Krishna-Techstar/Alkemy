@@ -132,21 +132,6 @@ const Index = () => {
             animate={{ opacity: 1 }}
             transition={{ duration: 1 }}
           >
-            {/* Event Label */}
-            <motion.div
-              className="mb-8"
-              initial={{ opacity: 0, y: -30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.3, duration: 0.6 }}
-            >
-              <div className="inline-block px-6 py-2 border-2 border-neon-red rounded-sm bg-deep-space/60 backdrop-blur-sm shadow-glow-red">
-                <span className="font-retro text-sm text-white tracking-widest" style={{
-                  textShadow: '0 0 5px hsl(var(--neon-red)), 0 0 10px hsl(var(--neon-red))',
-                }}>
-                  EVENT
-                </span>
-              </div>
-            </motion.div>
 
             {/* Main Title */}
             <motion.div

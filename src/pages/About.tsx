@@ -88,16 +88,16 @@ const About = () => {
       <div className="fixed inset-0 z-20 pointer-events-none scanlines opacity-20" />
       <Navbar />
 
-      <main className="relative z-10 pt-24 pb-16 px-4">
-        <div className="container mx-auto max-w-6xl">
+      <main className="relative z-10 pt-32 pb-24 px-6">
+        <div className="container mx-auto max-w-7xl">
           {/* Terminal Boot Sequence */}
           <motion.div
-            className="mb-12"
+            className="mb-16"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5 }}
           >
-            <div className="glass-panel border border-neon-red/50 p-6 font-retro text-xs">
+            <div className="glass-panel border border-neon-red/50 p-10 font-retro text-sm">
               <div className="flex items-center gap-2 mb-4">
                 <Terminal size={16} className="text-neon-red" />
                 <span className="text-neon-red">[SYSTEM_BOOT_SEQ.001]</span>
@@ -135,14 +135,14 @@ const About = () => {
 
           {/* Main Toggle Buttons */}
           <motion.div
-            className="flex gap-4 justify-center mb-12 flex-wrap"
+            className="flex gap-6 justify-center mb-16 flex-wrap"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.5 }}
           >
             <button
               onClick={() => setActiveSection(activeSection === 'about' ? null : 'about')}
-              className={`px-8 py-3 font-retro text-sm tracking-wider border-2 transition-all duration-300 ${
+              className={`px-10 py-4 font-retro text-base tracking-wider border-2 transition-all duration-300 ${
                 activeSection === 'about'
                   ? 'border-electric-purple bg-electric-purple/20 text-electric-purple shadow-glow-purple'
                   : 'border-electric-purple/30 text-electric-purple/70 hover:border-electric-purple/50 hover:text-electric-purple'
@@ -153,7 +153,7 @@ const About = () => {
 
             <button
               onClick={() => setActiveSection(activeSection === 'contact' ? null : 'contact')}
-              className={`px-8 py-3 font-retro text-sm tracking-wider border-2 transition-all duration-300 ${
+              className={`px-10 py-4 font-retro text-base tracking-wider border-2 transition-all duration-300 ${
                 activeSection === 'contact'
                   ? 'border-neon-red bg-neon-red/20 text-neon-red shadow-glow-red'
                   : 'border-neon-red/30 text-neon-red/70 hover:border-neon-red/50 hover:text-neon-red'
@@ -172,30 +172,30 @@ const About = () => {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -20 }}
                 transition={{ duration: 0.4 }}
-                className="space-y-8 mb-16"
+                className="space-y-12 mb-20"
               >
                 {/* Header */}
                 <motion.div
-                  className="text-center mb-12"
+                  className="text-center mb-16"
                   initial={{ opacity: 0, y: -30 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.1 }}
                 >
-                  <GlitchText text="ABOUT ALKEMY" className="text-5xl md:text-7xl lg:text-8xl" />
+                  <GlitchText text="ABOUT ALKEMY" className="text-5xl md:text-6xl lg:text-7xl" />
                   <div className="flex justify-center mt-4">
-                    <div className="w-48 h-0.5 bg-gradient-to-r from-transparent via-electric-purple to-transparent shadow-glow-purple" />
+                    <div className="w-64 h-1 bg-gradient-to-r from-transparent via-electric-purple to-transparent shadow-glow-purple" />
                   </div>
                 </motion.div>
 
                 {/* Mission Statement */}
                 <motion.div
-                  className="glass-panel border border-electric-purple/50 p-8"
+                  className="glass-panel border border-electric-purple/50 p-12"
                   initial={{ opacity: 0, x: -30 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: 0.2 }}
                 >
-                  <h2 className="font-heading text-3xl neon-text-purple mb-4">[ ACCESS_GRANTED ]</h2>
-                  <p className="text-white/90 font-body mb-6">
+                  <h2 className="font-heading text-4xl neon-text-purple mb-6">[ ACCESS_GRANTED ]</h2>
+                  <p className="text-white/90 font-body mb-8 text-lg">
                     ALKEMY FEST is a convergence of imagination, innovation, and chaos. Born from the depths of Hawkins 
                     National Laboratory's experimental archives, we have created the most immersive student festival 
                     experience in the digital age.
