@@ -3,6 +3,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X, User } from 'lucide-react';
 import ProfileDropdown from './ProfileDropdown';
+import { useVideoOverlay } from '@/contexts/VideoOverlayContext';
 
 const navLinks = [
   { name: 'HOME', path: '/' },
@@ -15,7 +16,7 @@ const navLinks = [
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isProfileOpen, setIsProfileOpen] = useState(false);
-  const [showVideoModal, setShowVideoModal] = useState(false);
+  const { openVideo } = useVideoOverlay();
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -25,7 +26,7 @@ const Navbar = () => {
 
   return (
     <motion.nav
-      className="fixed top-0 left-0 right-0 z-50 glass-panel border-b border-border/50"
+      className="fixed top-0 left-0 right-0 z-50 navbar-glass"
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.6, ease: 'easeOut' }}
@@ -95,7 +96,7 @@ const Navbar = () => {
                 FLIP TO UPSIDE DOWN
               </span>
               <motion.button
-                onClick={() => setShowVideoModal(true)}
+                onClick={openVideo}
                 className="w-12 h-6 rounded-full bg-muted border border-border relative overflow-hidden cursor-pointer"
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.95 }}
@@ -158,7 +159,7 @@ const Navbar = () => {
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            className="lg:hidden absolute top-full left-0 right-0 glass-panel border-b border-border"
+            className="lg:hidden absolute top-full left-0 right-0 navbar-glass"
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
@@ -206,62 +207,33 @@ const Navbar = () => {
                     {/* Mobile Profile Dropdown */}
                     <AnimatePresence>
                       {isProfileOpen && (
-                        <motion.div
-                          className="mt-2 flex flex-col gap-2"
-                          initial={{ opacity: 0, height: 0 }}
-                          animate={{ opacity: 1, height: 'auto' }}
-                          exit={{ opacity: 0, height: 0 }}
-                        >
-                          <Link
-                            to="/profile"
-                            onClick={() => {
-                              setIsProfileOpen(false);
-                              setIsOpen(false);
-                            }}
-                            className="block px-4 py-2 rounded bg-electric-purple/20 border border-electric-purple/30 text-electric-purple text-xs font-retro tracking-wider hover:bg-electric-purple/30 transition-all"
-                          >
-                            VIEW PROFILE
-                          </Link>
-                          <Link
-                            to="/profile"
-                            onClick={() => {
-                              setIsProfileOpen(false);
-                              setIsOpen(false);
-                            }}
-                            className="block px-4 py-2 rounded bg-electric-purple/20 border border-electric-purple/30 text-electric-purple text-xs font-retro tracking-wider hover:bg-electric-purple/30 transition-all"
-                          >
-                            MY EVENTS
-                          </Link>
-                          <Link
-                            to="/profile"
-                            onClick={() => {
-                              setIsProfileOpen(false);
-                              setIsOpen(false);
-                            }}
-                            className="block px-4 py-2 rounded bg-electric-purple/20 border border-electric-purple/30 text-electric-purple text-xs font-retro tracking-wider hover:bg-electric-purple/30 transition-all"
-                          >
-                            SETTINGS
-                          </Link>
-                          <button
-                            onClick={() => {
-                              localStorage.removeItem('authToken');
-                              localStorage.removeItem('userName');
-                              localStorage.removeItem('userEmail');
-                              localStorage.removeItem('userCollege');
-                              localStorage.removeItem('userDepartment');
-                              localStorage.removeItem('userYear');
-                              localStorage.removeItem('userPhone');
-                              localStorage.removeItem('userPhoto');
-                              setIsProfileOpen(false);
-                              setIsOpen(false);
-                            }}
-                            className="px-4 py-2 rounded bg-neon-red/20 border border-neon-red text-neon-red text-xs font-retro tracking-wider hover:bg-neon-red/30 transition-all"
-                          >
-                            LOGOUT
-                          </button>
-                        </motion.div>
+                         <motion.div
+                           initial={{ opacity: 0, height: 0 }}
+                           animate={{ opacity: 1, height: 'auto' }}
+                           exit={{ opacity: 0, height: 0 }}
+                           className="overflow-hidden bg-black/20 rounded mt-2"
+                         >
+                            <button
+                              onClick={() => navigate('/profile')}
+                              className="w-full text-left px-4 py-2 text-sm text-white/80 hover:text-white hover:bg-electric-purple/20 transition-colors"
+                            >
+                              PROFILE
+                            </button>
+                            <button
+                              onClick={() => {
+                                localStorage.removeItem('authToken');
+                                localStorage.removeItem('userName');
+                                setIsProfileOpen(false);
+                                setIsOpen(false); // Close mobile menu
+                              }}
+                              className="w-full text-left px-4 py-2 text-sm text-neon-red/80 hover:text-neon-red hover:bg-neon-red/10 transition-colors"
+                            >
+                              LOGOUT
+                            </button>
+                         </motion.div>
                       )}
                     </AnimatePresence>
+
                   </>
                 ) : (
                   <Link
@@ -278,108 +250,7 @@ const Navbar = () => {
         )}
       </AnimatePresence>
 
-      {/* Video Modal - Upside Down Intro Experience */}
-      <AnimatePresence>
-        {showVideoModal && (
-          <motion.div
-            className="fixed inset-0 z-[100] bg-black/60 backdrop-blur-sm flex items-center justify-center p-4"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.3 }}
-            onClick={() => setShowVideoModal(false)}
-          >
-            {/* Centered Modal */}
-            <motion.div
-              className="relative w-full max-w-2xl bg-black rounded-2xl overflow-hidden border-2 border-neon-red shadow-2xl"
-              initial={{ scale: 0.8, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.8, opacity: 0 }}
-              transition={{ duration: 0.3 }}
-              onClick={(e) => e.stopPropagation()}
-            >
-              {/* Video Container */}
-              <div className="relative w-full aspect-video bg-black overflow-hidden group cursor-pointer">
-                <video
-                  src="/videos/upsidedown.mp4"
-                  autoPlay
-                  className="w-full h-full object-cover"
-                  onEnded={() => setShowVideoModal(false)}
-                  onClick={() => setShowVideoModal(false)}
-                />
 
-                {/* Skip Text on Hover */}
-                <motion.div
-                  className="absolute inset-0 flex items-center justify-center bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10"
-                  whileHover={{ opacity: 1 }}
-                >
-                  <div className="text-center">
-                    <p className="text-white font-retro text-xl tracking-widest">CLICK TO SKIP</p>
-                    <p className="text-white/60 font-retro text-xs mt-2">or wait for video to end</p>
-                  </div>
-                </motion.div>
-              </div>
-
-              {/* Close Button - Top Right */}
-              <motion.button
-                onClick={() => setShowVideoModal(false)}
-                className="absolute top-3 right-3 z-20 p-2 rounded-full bg-neon-red/30 hover:bg-neon-red/60 text-white transition-all"
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                <X size={24} />
-              </motion.button>
-
-              {/* Bottom Action Buttons */}
-              <motion.div
-                className="w-full p-6 bg-gradient-to-t from-black via-black/90 to-transparent flex flex-col sm:flex-row gap-3 justify-center items-center z-20"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.5, duration: 0.4 }}
-            >
-              <motion.button
-                onClick={() => {
-                  setShowVideoModal(false);
-                  navigate('/signup');
-                }}
-                className="px-6 py-2.5 rounded-lg border-2 border-electric-purple bg-electric-purple/20 hover:bg-electric-purple/40 text-white font-retro text-sm tracking-widest transition-all"
-                whileHover={{ scale: 1.05, boxShadow: '0 0 15px hsl(var(--electric-purple))' }}
-                whileTap={{ scale: 0.95 }}
-              >
-                JOIN THE PARTY
-              </motion.button>
-
-              <motion.button
-                onClick={() => {
-                  setShowVideoModal(false);
-                  navigate('/schedule');
-                }}
-                className="px-6 py-2.5 rounded-lg border-2 border-neon-red bg-neon-red/20 hover:bg-neon-red/40 text-white font-retro text-sm tracking-widest transition-all"
-                whileHover={{ scale: 1.05, boxShadow: '0 0 15px hsl(var(--neon-red))' }}
-                whileTap={{ scale: 0.95 }}
-              >
-                VIEW SCHEDULE
-              </motion.button>
-
-              <motion.button
-                onClick={() => {
-                  // Download schedule PDF
-                  const link = document.createElement('a');
-                  link.href = '/schedule.pdf';
-                  link.download = 'alkemy-schedule.pdf';
-                  link.click();
-                }}
-                className="px-6 py-2.5 rounded-lg border-2 border-cyan-400 bg-cyan-400/20 hover:bg-cyan-400/40 text-white font-retro text-sm tracking-widest transition-all"
-                whileHover={{ scale: 1.05, boxShadow: '0 0 15px rgba(34, 211, 238, 0.8)' }}
-                whileTap={{ scale: 0.95 }}
-              >
-                DOWNLOAD SCHEDULE
-              </motion.button>
-            </motion.div>
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
     </motion.nav>
   );
 };

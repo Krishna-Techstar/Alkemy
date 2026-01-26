@@ -80,10 +80,10 @@ export default {
         },
       },
       fontFamily: {
-        heading: ["Bebas Neue", "Orbitron", "sans-serif"],
-        display: ["Orbitron", "sans-serif"],
-        body: ["Inter", "Space Grotesk", "sans-serif"],
-        retro: ["VT323", "monospace"],
+        heading: ["ITC Benguiat Bold", "ITC Benguiat", "serif"],
+        display: ["ITC Benguiat Bold", "ITC Benguiat", "serif"],
+        body: ["ITC Benguiat", "serif"],
+        retro: ["ITC Benguiat", "serif"],
       },
       borderRadius: {
         lg: "var(--radius)",

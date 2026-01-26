@@ -267,7 +267,7 @@ export default function SignupPage() {
         <div className="w-full max-w-lg mb-6">
           <p 
             className="text-center text-foreground/60 text-sm tracking-[0.2em] uppercase mb-3"
-            style={{ fontFamily: 'var(--font-bebas)' }}
+            style={{ fontFamily: 'ITC Benguiat Bold, serif' }}
           >
             CLEARANCE LEVEL
           </p>
@@ -319,14 +319,14 @@ export default function SignupPage() {
             <div className="flex justify-between items-start mb-4">
               <div 
                 className="px-3 py-1 border-2 border-crimson-glow text-crimson-glow text-xs tracking-wider rotate-[-3deg]"
-                style={{ fontFamily: 'var(--font-bebas)' }}
+                style={{ fontFamily: 'ITC Benguiat Bold, serif' }}
               >
                 <span className="block text-lg">HAWKINS</span>
                 <span className="text-[8px]">THEORETICAL LABORATORY</span>
               </div>
               <div 
                 className="px-3 py-1 border-2 border-crimson-glow text-crimson-glow text-xs tracking-wider rotate-[2deg]"
-                style={{ fontFamily: 'var(--font-bebas)' }}
+                style={{ fontFamily: 'ITC Benguiat Bold, serif' }}
               >
                 <span className="block text-lg">HAWKINS</span>
                 <span className="text-[8px]">THEORETICAL LABORATORY</span>
@@ -337,7 +337,7 @@ export default function SignupPage() {
             <div 
               className="absolute right-0 top-1/2 -translate-y-1/2 transform rotate-90 origin-right"
               style={{ 
-                fontFamily: 'var(--font-bebas)',
+                fontFamily: 'ITC Benguiat Bold, serif',
                 color: '#8B7355',
                 letterSpacing: '0.3em',
                 fontSize: '20px'
@@ -370,13 +370,13 @@ export default function SignupPage() {
                   className={`text-3xl md:text-4xl tracking-[0.1em] transition-all ${
                     !isSignIn ? 'text-crimson-glow' : 'text-[#8B7355]/50'
                   }`}
-                  style={{ fontFamily: 'var(--font-bebas)' }}
+                  style={{ fontFamily: 'ITC Benguiat Bold, serif' }}
                 >
                   SIGNUP
                 </button>
                 <span 
                   className="text-3xl md:text-4xl text-[#8B7355]"
-                  style={{ fontFamily: 'var(--font-bebas)' }}
+                  style={{ fontFamily: 'ITC Benguiat Bold, serif' }}
                 >
                   /
                 </span>
@@ -398,7 +398,7 @@ export default function SignupPage() {
                   className={`text-3xl md:text-4xl tracking-[0.1em] transition-all ${
                     isSignIn ? 'text-crimson-glow' : 'text-[#8B7355]/50'
                   }`}
-                  style={{ fontFamily: 'var(--font-bebas)' }}
+                  style={{ fontFamily: 'ITC Benguiat Bold, serif' }}
                 >
                   SIGNIN
                 </button>
@@ -413,7 +413,7 @@ export default function SignupPage() {
                   <div>
                     <label 
                       className="block text-[#5C4A32] text-sm tracking-wider mb-1 uppercase"
-                      style={{ fontFamily: 'var(--font-bebas)' }}
+                      style={{ fontFamily: 'ITC Benguiat Bold, serif' }}
                     >
                       FULL NAME
                     </label>
@@ -436,7 +436,7 @@ export default function SignupPage() {
                   <div>
                     <label 
                       className="block text-[#5C4A32] text-sm tracking-wider mb-1 uppercase"
-                      style={{ fontFamily: 'var(--font-bebas)' }}
+                      style={{ fontFamily: 'ITC Benguiat Bold, serif' }}
                     >
                       MOBILE NUMBER
                     </label>
@@ -459,7 +459,7 @@ export default function SignupPage() {
                   <div>
                     <label 
                       className="block text-[#5C4A32] text-sm tracking-wider mb-1 uppercase"
-                      style={{ fontFamily: 'var(--font-bebas)' }}
+                      style={{ fontFamily: 'ITC Benguiat Bold, serif' }}
                     >
                       COLLEGE NAME
                     </label>
@@ -482,7 +482,7 @@ export default function SignupPage() {
                   <div>
                     <label 
                       className="block text-[#5C4A32] text-sm tracking-wider mb-1 uppercase"
-                      style={{ fontFamily: 'var(--font-bebas)' }}
+                      style={{ fontFamily: 'ITC Benguiat Bold, serif' }}
                     >
                       DEPARTMENT / BRANCH
                     </label>
@@ -505,7 +505,7 @@ export default function SignupPage() {
                   <div>
                     <label 
                       className="block text-[#5C4A32] text-sm tracking-wider mb-1 uppercase"
-                      style={{ fontFamily: 'var(--font-bebas)' }}
+                      style={{ fontFamily: 'ITC Benguiat Bold, serif' }}
                     >
                       YEAR OF STUDY
                     </label>
@@ -532,7 +532,7 @@ export default function SignupPage() {
                   <div>
                     <label 
                       className="block text-[#5C4A32] text-sm tracking-wider mb-1 uppercase"
-                      style={{ fontFamily: 'var(--font-bebas)' }}
+                      style={{ fontFamily: 'ITC Benguiat Bold, serif' }}
                     >
                       PROFILE PHOTO (Optional)
                     </label>
@@ -592,7 +592,7 @@ export default function SignupPage() {
               <div>
                 <label 
                   className="block text-[#5C4A32] text-sm tracking-wider mb-1 uppercase"
-                  style={{ fontFamily: 'var(--font-bebas)' }}
+                  style={{ fontFamily: 'ITC Benguiat Bold, serif' }}
                 >
                   EMAIL
                 </label>
@@ -615,7 +615,7 @@ export default function SignupPage() {
               <div>
                 <label 
                   className="block text-[#5C4A32] text-sm tracking-wider mb-1 uppercase"
-                  style={{ fontFamily: 'var(--font-bebas)' }}
+                  style={{ fontFamily: 'ITC Benguiat Bold, serif' }}
                 >
                   PASSWORD
                 </label>
@@ -648,7 +648,7 @@ export default function SignupPage() {
                 <div>
                   <label 
                     className="block text-[#5C4A32] text-sm tracking-wider mb-1 uppercase"
-                    style={{ fontFamily: 'var(--font-bebas)' }}
+                    style={{ fontFamily: 'ITC Benguiat Bold, serif' }}
                   >
                     Confirm Password
                   </label>
@@ -708,7 +708,7 @@ export default function SignupPage() {
                       : 'bg-neon-red hover:bg-crimson-glow'
                   }`}
                   style={{ 
-                    fontFamily: 'var(--font-bebas)',
+                    fontFamily: 'ITC Benguiat Bold, serif',
                     boxShadow: isLoading ? 'none' : "0 4px 15px rgba(255, 43, 43, 0.4)"
                   }}
                 >
@@ -720,7 +720,7 @@ export default function SignupPage() {
                   onClick={handleGoogleSignIn}
                   disabled={isLoading}
                   className="flex items-center gap-2 px-4 py-3 bg-white border-2 border-[#8B7355]/30 rounded text-[#5C4A32] text-sm tracking-wider transition-all hover:border-[#8B7355] disabled:opacity-50 disabled:cursor-not-allowed"
-                  style={{ fontFamily: 'var(--font-bebas)' }}
+                  style={{ fontFamily: 'ITC Benguiat Bold, serif' }}
                 >
                   <svg className="w-5 h-5" viewBox="0 0 24 24">
                     <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>

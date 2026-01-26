@@ -179,7 +179,7 @@ const Index = () => {
             >
               <Link to="/events">
                 <NeonButton variant="outline" size="lg">
-                  <span className="flex flex-col items-center" style={{ fontFamily: "'Libre Baskerville', serif" }}>
+                  <span className="flex flex-col items-center" style={{ fontFamily: 'ITC Benguiat Bold, serif' }}>
                     <span className="text-xl">ENTER THE LAB</span>
                     <span className="text-xs font-retro text-neon-red/80">(EVENTS)</span>
                   </span>
@@ -188,7 +188,7 @@ const Index = () => {
               
               <Link to="/signup">
                 <NeonButton variant="secondary" size="lg">
-                  <span className="flex flex-col items-center" style={{ fontFamily: "'Libre Baskerville', serif" }}>
+                  <span className="flex flex-col items-center" style={{ fontFamily: 'ITC Benguiat Bold, serif' }}>
                     <span className="text-xl">JOIN THE PARTY</span>
                     <span className="text-xs font-retro text-electric-purple/80">(SIGNUP)</span>
                   </span>
@@ -197,7 +197,7 @@ const Index = () => {
 
               <Link to="/schedule">
                 <NeonButton variant="outline" size="lg">
-                  <span className="flex flex-col items-center" style={{ fontFamily: "'Libre Baskerville', serif" }}>
+                  <span className="flex flex-col items-center" style={{ fontFamily: 'ITC Benguiat Bold, serif' }}>
                     <span className="text-xl">VIEW SCHEDULE</span>
                     <span className="text-xs font-retro text-electric-purple/80">(TAP HERE)</span>
                   </span>
