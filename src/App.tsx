@@ -6,6 +6,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import BackgroundVideo from "@/components/BackgroundVideo";
 import Index from "./pages/Index";
 import Events from "./pages/Events";
+import CategoryEvents from "./pages/CategoryEvents";
 import Schedule from "./pages/Schedule";
 import PastEvents from "./pages/PastEvents";
 import Council from "./pages/Council";
@@ -31,6 +32,7 @@ const App = () => (
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/events" element={<Events />} />
+          <Route path="/events/:category" element={<CategoryEvents />} />
           <Route path="/schedule" element={<Schedule />} />
           <Route path="/past-events" element={<PastEvents />} />
           <Route path="/council" element={<Council />} />

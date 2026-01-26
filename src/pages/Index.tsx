@@ -194,6 +194,15 @@ const Index = () => {
                   </span>
                 </NeonButton>
               </Link>
+
+              <Link to="/schedule">
+                <NeonButton variant="outline" size="lg">
+                  <span className="flex flex-col items-center" style={{ fontFamily: "'Libre Baskerville', serif" }}>
+                    <span className="text-xl">VIEW SCHEDULE</span>
+                    <span className="text-xs font-retro text-electric-purple/80">(TAP HERE)</span>
+                  </span>
+                </NeonButton>
+              </Link>
             </motion.div>
           </motion.div>
 
