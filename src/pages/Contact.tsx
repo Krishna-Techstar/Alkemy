@@ -181,7 +181,16 @@ const Contact = ({ isEmbedded = false }: ContactProps) => {
     <div className="relative min-h-screen bg-deep-space">
       {/* Background */}
       <div className="fixed inset-0 z-0">
-        <div className="absolute inset-0 bg-gradient-to-b from-deep-space via-midnight-navy to-deep-space" />
+              {/* Background */}
+      <div 
+        className="fixed inset-0 z-0 bg-cover bg-center bg-no-repeat"
+        style={{
+          backgroundImage: 'url(images/Event-BG.png)',
+        }}
+      >
+
+      </div>
+  
       </div>
 
       <ParticleBackground />

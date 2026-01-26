@@ -2,6 +2,8 @@ import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import Navbar from '@/components/Navbar';
+import HeroSection from '@/components/HeroSection';
+import ArcadeMachineCategory from '@/components/ArcadeMachineCategory';
 import ParticleBackground from '@/components/ParticleBackground';
 import GlitchText from '@/components/GlitchText';
 import NeonButton from '@/components/NeonButton';
@@ -59,7 +61,7 @@ const Index = () => {
     <div className="relative min-h-screen overflow-hidden">
       {/* Radial gradient vignette - darker at edges */}
       <div className="fixed inset-0 z-[0] pointer-events-none bg-[radial-gradient(ellipse_at_center,_transparent_0%,_rgba(0,0,0,0.4)_70%,_rgba(0,0,0,0.7)_100%)]" />
-      
+
       {/* Vines on left and right edges */}
       <div className="fixed left-0 top-0 bottom-0 w-32 md:w-48 z-[1] pointer-events-none opacity-60">
         <svg className="w-full h-full" viewBox="0 0 200 800" preserveAspectRatio="xMinYMin meet">
@@ -86,7 +88,7 @@ const Index = () => {
           />
         </svg>
       </div>
-      
+
       <div className="fixed right-0 top-0 bottom-0 w-32 md:w-48 z-[1] pointer-events-none opacity-60">
         <svg className="w-full h-full" viewBox="0 0 200 800" preserveAspectRatio="xMaxYMin meet">
           <path
@@ -120,111 +122,13 @@ const Index = () => {
       <div className="absolute inset-0 z-20 pointer-events-none scanlines opacity-15" />
 
       {/* Navigation */}
+      {/* Navigation */}
       <Navbar />
 
       {/* Hero Content */}
       <main className="relative z-10">
         {/* Hero Section */}
-        <section className="min-h-screen flex flex-col items-center justify-center px-4">
-          <motion.div
-            className="text-center"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 1 }}
-          >
-
-            {/* Main Title */}
-            <motion.div
-              className="relative mb-4"
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 0.5, duration: 0.8, ease: 'easeOut' }}
-            >
-              {/* Top decorative line - extending from text */}
-              <div className="absolute left-1/2 -translate-x-1/2 -top-4 w-48 md:w-96 h-0.5 bg-gradient-to-r from-transparent via-neon-red to-transparent" style={{
-                boxShadow: '0 0 10px hsl(var(--neon-red)), 0 0 20px hsl(var(--neon-red) / 0.5)',
-              }} />
-              
-              <GlitchText
-                text="ALKEMY"
-                className="text-7xl md:text-9xl lg:text-[12rem] leading-none"
-              />
-              
-              {/* Bottom decorative line - extending from text */}
-              <div className="absolute left-1/2 -translate-x-1/2 -bottom-2 w-64 md:w-[32rem] h-0.5 bg-gradient-to-r from-transparent via-neon-red to-transparent" style={{
-                boxShadow: '0 0 10px hsl(var(--neon-red)), 0 0 20px hsl(var(--neon-red) / 0.5)',
-              }} />
-            </motion.div>
-
-            {/* Subtitle - Increased letter spacing for cinematic feel */}
-            <motion.p
-              className="font-display text-lg md:text-2xl lg:text-3xl text-white mb-12"
-              style={{
-                letterSpacing: '0.5em',
-                textShadow: '0 0 10px hsl(var(--neon-red) / 0.5), 0 0 20px hsl(var(--neon-red) / 0.3)',
-              }}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.8, duration: 0.6 }}
-            >
-              THE UPSIDE DOWN OF COLLEGE FESTS
-            </motion.p>
-
-            {/* CTA Buttons - Stranger Things style */}
-            <motion.div
-              className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6"
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 1, duration: 0.6 }}
-            >
-              <Link to="/events">
-                <NeonButton variant="outline" size="lg">
-                  <span className="flex flex-col items-center" style={{ fontFamily: "'Libre Baskerville', serif" }}>
-                    <span className="text-xl">ENTER THE LAB</span>
-                    <span className="text-xs font-retro text-neon-red/80">(EVENTS)</span>
-                  </span>
-                </NeonButton>
-              </Link>
-              
-              <Link to="/signup">
-                <NeonButton variant="secondary" size="lg">
-                  <span className="flex flex-col items-center" style={{ fontFamily: "'Libre Baskerville', serif" }}>
-                    <span className="text-xl">JOIN THE PARTY</span>
-                    <span className="text-xs font-retro text-electric-purple/80">(SIGNUP)</span>
-                  </span>
-                </NeonButton>
-              </Link>
-
-              <Link to="/schedule">
-                <NeonButton variant="outline" size="lg">
-                  <span className="flex flex-col items-center" style={{ fontFamily: "'Libre Baskerville', serif" }}>
-                    <span className="text-xl">VIEW SCHEDULE</span>
-                    <span className="text-xs font-retro text-electric-purple/80">(TAP HERE)</span>
-                  </span>
-                </NeonButton>
-              </Link>
-            </motion.div>
-          </motion.div>
-
-          {/* Scroll Indicator */}
-          <motion.div
-            className="absolute bottom-8 left-1/2 -translate-x-1/2"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1, y: [0, 10, 0] }}
-            transition={{ 
-              opacity: { delay: 1.5, duration: 0.5 },
-              y: { delay: 2, duration: 2, repeat: Infinity }
-            }}
-          >
-            <div className="w-6 h-10 border-2 border-foreground/30 rounded-full flex justify-center">
-              <motion.div
-                className="w-1 h-2 bg-neon-red rounded-full mt-2"
-                animate={{ y: [0, 12, 0] }}
-                transition={{ duration: 1.5, repeat: Infinity }}
-              />
-            </div>
-          </motion.div>
-        </section>
+        <HeroSection />
 
         {/* Countdown Section */}
         <section className="relative py-16 bg-gradient-to-b from-transparent via-deep-space/50 to-deep-space/80">
@@ -255,86 +159,18 @@ const Index = () => {
             </motion.div>
 
             {/* Categories Grid */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-              {eventCategories.map((category, index) => {
-                const IconComponent = category.icon;
-                const colorMap: Record<string, { glow: string; border: string; text: string; bg: string }> = {
-                  red: { glow: 'shadow-glow-red', border: 'border-neon-red', text: 'neon-text-red', bg: 'from-neon-red/20' },
-                  purple: { glow: 'shadow-glow-purple', border: 'border-electric-purple', text: 'neon-text-purple', bg: 'from-electric-purple/20' },
-                  cyan: { glow: 'shadow-glow-cyan', border: 'border-cyber-blue', text: 'text-cyber-blue', bg: 'from-cyber-blue/20' },
-                  magenta: { glow: 'shadow-glow-magenta', border: 'border-neon-magenta', text: 'text-neon-magenta', bg: 'from-neon-magenta/20' },
-                };
-                const colors = colorMap[category.color] || colorMap.red;
-
-                return (
-                  <motion.div
-                    key={category.title}
-                    className="relative group h-96 rounded-xl overflow-hidden cursor-pointer"
-                    initial={{ opacity: 0, y: 40 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: index * 0.1, duration: 0.5 }}
-                  >
-                    {/* Background Image */}
-                    <div className="absolute inset-0">
-                      <img
-                        src={category.image}
-                        alt={category.title}
-                        className="w-full h-full object-cover"
-                      />
-                      {/* Gradient Overlay */}
-                      <div className={`absolute inset-0 bg-gradient-to-t ${colors.bg} via-deep-space/80 to-deep-space/40`} />
-                    </div>
-
-                    {/* Arcade Cabinet Border Effect */}
-                    <div className={`absolute inset-0 border-2 ${colors.border} rounded-xl transition-all duration-300 group-hover:${colors.glow}`} />
-
-                    {/* Content Container */}
-                    <div className="relative h-full flex flex-col justify-between p-6 text-white">
-                      {/* Top Section - Icon */}
-                      <motion.div
-                        className={`flex items-center justify-center w-16 h-16 rounded-lg bg-gradient-to-br ${colors.bg} border ${colors.border} ${colors.glow}`}
-                        whileHover={{ scale: 1.1, rotate: 5 }}
-                        whileTap={{ scale: 0.95 }}
-                      >
-                        <IconComponent size={32} className={colors.text} />
-                      </motion.div>
-
-                      {/* Bottom Section - Title and Description */}
-                      <div className="space-y-3">
-                        <h3 className={`font-heading text-2xl md:text-3xl font-bold ${colors.text} transition-all duration-300`}>
-                          {category.title}
-                        </h3>
-                        <p className="text-sm md:text-base text-white/90 line-clamp-2 group-hover:line-clamp-none transition-all">
-                          {category.description}
-                        </p>
-
-                        {/* CTA Arrow */}
-                        <motion.div
-                          className="flex items-center gap-2 text-sm font-retro tracking-wider"
-                          whileHover={{ x: 5 }}
-                          initial={{ opacity: 0, x: -10 }}
-                          whileInView={{ opacity: 1, x: 0 }}
-                          transition={{ delay: index * 0.1 + 0.2 }}
-                        >
-                          <span>ENTER</span>
-                          <motion.span
-                            animate={{ x: [0, 5, 0] }}
-                            transition={{ duration: 1.5, repeat: Infinity }}
-                          >
-                            →
-                          </motion.span>
-                        </motion.div>
-                      </div>
-
-                      {/* Scanline Effect */}
-                      <div className="absolute inset-0 pointer-events-none opacity-5">
-                        <div className="absolute inset-0 bg-[repeating-linear-gradient(0deg,_transparent,_transparent_2px,_rgba(255,255,255,0.05)_2px,_rgba(255,255,255,0.05)_4px)]" />
-                      </div>
-                    </div>
-                  </motion.div>
-                );
-              })}
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+              {eventCategories.map((category, index) => (
+                <ArcadeMachineCategory
+                  key={category.title}
+                  title={category.title}
+                  description={category.description}
+                  icon={category.icon}
+                  color={category.color as any}
+                  imageUrl={category.image}
+                  onClick={() => {/* Navigation logic */ }}
+                />
+              ))}
             </div>
           </div>
         </section>

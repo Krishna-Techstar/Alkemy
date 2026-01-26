@@ -4,6 +4,7 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import { ArrowLeft, AlertCircle } from 'lucide-react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
+import '@/components/ArcadeEventCard.css';
 
 const EventRegistration = () => {
   const navigate = useNavigate();
@@ -82,20 +83,20 @@ const EventRegistration = () => {
       {/* Neon Glitch Background */}
       <div className="fixed inset-0 z-0">
         <div className="absolute inset-0 bg-gradient-to-b from-[#1a0033] via-[#2d1b4e] to-[#1a0033]" />
-        
+
         {/* Neon Lines */}
         <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-cyan-500 to-transparent opacity-50" />
         <div className="absolute top-20 left-0 w-full h-0.5 bg-gradient-to-r from-transparent via-magenta-500 to-transparent opacity-40" />
         <div className="absolute top-40 left-0 w-full h-0.5 bg-gradient-to-r from-transparent via-cyan-400 to-transparent opacity-50" />
         <div className="absolute bottom-40 left-0 w-full h-0.5 bg-gradient-to-r from-transparent via-red-500 to-transparent opacity-40" />
-        
+
         {/* Scanlines */}
         <div className="absolute inset-0 opacity-50"
           style={{
             backgroundImage: 'repeating-linear-gradient(0deg, rgba(255,255,255,0.02) 0px, rgba(255,255,255,0.02) 1px, transparent 1px, transparent 3px)',
           }}
         />
-        
+
         {/* Center Glow */}
         <div className="absolute top-1/2 left-1/2 w-96 h-96 bg-purple-600/20 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2" />
       </div>
@@ -120,219 +121,176 @@ const EventRegistration = () => {
           </motion.button>
 
           {/* Arcade Machine Container */}
-          <div 
-            className="relative bg-cover bg-center rounded-3xl overflow-hidden"
-            style={{
-              backgroundImage: 'url(/images/ArcadeCard-BG.png)',
-              backgroundSize: 'contain',
-              backgroundRepeat: 'no-repeat',
-              backgroundPosition: 'center',
-              aspectRatio: '1/1.3',
-            }}
-          >
-            {/* Neon Border Glow */}
-            <div className="absolute inset-0 rounded-3xl" style={{
-              boxShadow: 'inset 0 0 60px rgba(0,245,212,0.4), inset 0 0 30px rgba(255,43,43,0.3), 0 0 80px rgba(0,245,212,0.3)',
-            }} />
+          <div className="event-arcade-cabinet" style={{ '--neon-color': '#FF2B2B', height: '700px' } as any}>
+            <div className="side-panel-l"></div>
+            <div className="side-panel-r"></div>
 
-            {/* Top Title Section */}
-            <div className="absolute top-8 left-0 right-0 px-6 z-30 text-center">
-              <h2 className="font-retro text-lg tracking-widest uppercase font-bold" 
-                style={{
-                  color: '#FF2B2B',
-                  textShadow: '0 0 20px rgba(255,43,43,0.8)',
-                  letterSpacing: '0.15em',
-                }}>
-                {eventTitle?.substring(0, 20)}
-              </h2>
+            {/* Marquee */}
+            <div className="cabinet-marquee">
+              <div className="marquee-text">REGISTRATION</div>
             </div>
 
             {/* Display Screen Area - Form Content */}
-            <div className="absolute top-[16%] left-[8%] right-[8%] h-[48%] z-10">
-              <div className="relative w-full h-full bg-black/80 rounded-lg overflow-y-auto p-4" style={{
-                boxShadow: `0 0 40px #FF2B2B, inset 0 0 20px rgba(255,43,43,0.2)`,
-                border: '2px solid #FF2B2B',
-              }}>
-                {/* Scanlines in Display */}
-                <div className="absolute inset-0 opacity-20 pointer-events-none"
-                  style={{
-                    backgroundImage: 'repeating-linear-gradient(0deg, rgba(255,255,255,0.04) 0px, rgba(255,255,255,0.04) 1px, transparent 1px, transparent 3px)',
-                  }}
-                />
+            <div className="cabinet-screen-mount" style={{ flex: '1', margin: '10px 15px' }}>
+              <div className="cabinet-screen">
+                <div className="screen-overlay"></div>
+                <div className="crt-effect"></div>
+                <div className="relative z-10 w-full h-full p-6 overflow-y-auto custom-scrollbar">
+                  <h2 className="font-retro text-sm text-center mb-4" style={{ color: '#FF2B2B', textShadow: '0 0 10px #FF2B2B' }}>
+                    {eventTitle}
+                  </h2>
 
-                <div className="relative z-10 space-y-2">
-                  {/* Name Input */}
-                  <div>
-                    <input
-                      type="text"
-                      name="fullName"
-                      value={formData.fullName}
-                      onChange={handleChange}
-                      placeholder="NAME"
-                      className="w-full px-2 py-1 bg-black/60 border border-cyan-400/50 text-cyan-300 font-retro text-xs placeholder:text-cyan-600 focus:outline-none focus:border-magenta-400"
-                    />
-                    {errors.fullName && (
-                      <div className="text-red-400 text-xs font-retro mt-0.5">{errors.fullName}</div>
+                  <div className="space-y-4">
+                    {/* Name Input */}
+                    <div>
+                      <input
+                        type="text"
+                        name="fullName"
+                        value={formData.fullName}
+                        onChange={handleChange}
+                        placeholder="NAME"
+                        className="w-full px-2 py-1 bg-black/60 border border-cyan-400/50 text-cyan-300 font-retro text-xs placeholder:text-cyan-600 focus:outline-none focus:border-magenta-400"
+                      />
+                      {errors.fullName && (
+                        <div className="text-red-400 text-[10px] font-retro mt-0.5">{errors.fullName}</div>
+                      )}
+                    </div>
+
+                    {/* Email Input */}
+                    <div>
+                      <input
+                        type="email"
+                        name="email"
+                        value={formData.email}
+                        onChange={handleChange}
+                        placeholder="EMAIL"
+                        className="w-full px-2 py-1 bg-black/60 border border-cyan-400/50 text-cyan-300 font-retro text-xs placeholder:text-cyan-600 focus:outline-none focus:border-magenta-400"
+                      />
+                      {errors.email && (
+                        <div className="text-red-400 text-[10px] font-retro mt-0.5">{errors.email}</div>
+                      )}
+                    </div>
+
+                    {/* Phone Input */}
+                    <div>
+                      <input
+                        type="tel"
+                        name="phone"
+                        value={formData.phone}
+                        onChange={handleChange}
+                        placeholder="PHONE"
+                        className="w-full px-2 py-1 bg-black/60 border border-cyan-400/50 text-cyan-300 font-retro text-xs placeholder:text-cyan-600 focus:outline-none focus:border-magenta-400"
+                      />
+                      {errors.phone && (
+                        <div className="text-red-400 text-[10px] font-retro mt-0.5">{errors.phone}</div>
+                      )}
+                    </div>
+
+                    {/* College Input */}
+                    <div>
+                      <input
+                        type="text"
+                        name="college"
+                        value={formData.college}
+                        onChange={handleChange}
+                        placeholder="COLLEGE"
+                        className="w-full px-2 py-1 bg-black/60 border border-cyan-400/50 text-cyan-300 font-retro text-xs placeholder:text-cyan-600 focus:outline-none focus:border-magenta-400"
+                      />
+                      {errors.college && (
+                        <div className="text-red-400 text-[10px] font-retro mt-0.5">{errors.college}</div>
+                      )}
+                    </div>
+
+                    {/* Department Input */}
+                    <div>
+                      <input
+                        type="text"
+                        name="department"
+                        value={formData.department}
+                        onChange={handleChange}
+                        placeholder="DEPT"
+                        className="w-full px-2 py-1 bg-black/60 border border-cyan-400/50 text-cyan-300 font-retro text-xs placeholder:text-cyan-600 focus:outline-none focus:border-magenta-400"
+                      />
+                      {errors.department && (
+                        <div className="text-red-400 text-[10px] font-retro mt-0.5">{errors.department}</div>
+                      )}
+                    </div>
+
+                    {/* Year Select */}
+                    <div>
+                      <select
+                        name="year"
+                        value={formData.year}
+                        onChange={handleChange}
+                        className="w-full px-2 py-1 bg-black/60 border border-cyan-400/50 text-cyan-300 font-retro text-xs focus:outline-none focus:border-magenta-400"
+                      >
+                        <option value="">YEAR</option>
+                        <option value="1">1st</option>
+                        <option value="2">2nd</option>
+                        <option value="3">3rd</option>
+                        <option value="4">4th</option>
+                      </select>
+                      {errors.year && (
+                        <div className="text-red-400 text-[10px] font-retro mt-0.5">{errors.year}</div>
+                      )}
+                    </div>
+
+                    {/* Rules Checkbox */}
+                    <label className="flex items-center gap-2 text-cyan-300 text-[10px] font-retro cursor-pointer pt-1">
+                      <input
+                        type="checkbox"
+                        name="acceptRules"
+                        checked={formData.acceptRules}
+                        onChange={handleChange}
+                        className="w-3 h-3 accent-magenta-500"
+                      />
+                      <span>ACCEPT RULES</span>
+                    </label>
+                    {errors.acceptRules && (
+                      <div className="text-red-400 text-[10px] font-retro">{errors.acceptRules}</div>
                     )}
                   </div>
-
-                  {/* Email Input */}
-                  <div>
-                    <input
-                      type="email"
-                      name="email"
-                      value={formData.email}
-                      onChange={handleChange}
-                      placeholder="EMAIL"
-                      className="w-full px-2 py-1 bg-black/60 border border-cyan-400/50 text-cyan-300 font-retro text-xs placeholder:text-cyan-600 focus:outline-none focus:border-magenta-400"
-                    />
-                    {errors.email && (
-                      <div className="text-red-400 text-xs font-retro mt-0.5">{errors.email}</div>
-                    )}
-                  </div>
-
-                  {/* Phone Input */}
-                  <div>
-                    <input
-                      type="tel"
-                      name="phone"
-                      value={formData.phone}
-                      onChange={handleChange}
-                      placeholder="PHONE"
-                      className="w-full px-2 py-1 bg-black/60 border border-cyan-400/50 text-cyan-300 font-retro text-xs placeholder:text-cyan-600 focus:outline-none focus:border-magenta-400"
-                    />
-                    {errors.phone && (
-                      <div className="text-red-400 text-xs font-retro mt-0.5">{errors.phone}</div>
-                    )}
-                  </div>
-
-                  {/* College Input */}
-                  <div>
-                    <input
-                      type="text"
-                      name="college"
-                      value={formData.college}
-                      onChange={handleChange}
-                      placeholder="COLLEGE"
-                      className="w-full px-2 py-1 bg-black/60 border border-cyan-400/50 text-cyan-300 font-retro text-xs placeholder:text-cyan-600 focus:outline-none focus:border-magenta-400"
-                    />
-                    {errors.college && (
-                      <div className="text-red-400 text-xs font-retro mt-0.5">{errors.college}</div>
-                    )}
-                  </div>
-
-                  {/* Department Input */}
-                  <div>
-                    <input
-                      type="text"
-                      name="department"
-                      value={formData.department}
-                      onChange={handleChange}
-                      placeholder="DEPT"
-                      className="w-full px-2 py-1 bg-black/60 border border-cyan-400/50 text-cyan-300 font-retro text-xs placeholder:text-cyan-600 focus:outline-none focus:border-magenta-400"
-                    />
-                    {errors.department && (
-                      <div className="text-red-400 text-xs font-retro mt-0.5">{errors.department}</div>
-                    )}
-                  </div>
-
-                  {/* Year Select */}
-                  <div>
-                    <select
-                      name="year"
-                      value={formData.year}
-                      onChange={handleChange}
-                      className="w-full px-2 py-1 bg-black/60 border border-cyan-400/50 text-cyan-300 font-retro text-xs focus:outline-none focus:border-magenta-400"
-                    >
-                      <option value="">YEAR</option>
-                      <option value="1">1st</option>
-                      <option value="2">2nd</option>
-                      <option value="3">3rd</option>
-                      <option value="4">4th</option>
-                    </select>
-                    {errors.year && (
-                      <div className="text-red-400 text-xs font-retro mt-0.5">{errors.year}</div>
-                    )}
-                  </div>
-
-                  {/* Rules Checkbox */}
-                  <label className="flex items-center gap-2 text-cyan-300 text-xs font-retro cursor-pointer pt-1">
-                    <input
-                      type="checkbox"
-                      name="acceptRules"
-                      checked={formData.acceptRules}
-                      onChange={handleChange}
-                      className="w-3 h-3 accent-magenta-500"
-                    />
-                    <span>ACCEPT RULES</span>
-                  </label>
-                  {errors.acceptRules && (
-                    <div className="text-red-400 text-xs font-retro">{errors.acceptRules}</div>
-                  )}
                 </div>
               </div>
             </div>
 
-            {/* Screen Bezel Overlay */}
-            <img
-              src="/images/arcade_no_bg.png"
-              alt="Screen Frame"
-              className="absolute top-[16%] left-[8%] right-[8%] h-[48%] object-cover pointer-events-none z-20"
-            />
-
-            {/* Control Lights Section */}
-            <div className="absolute bottom-32 left-0 right-0 z-30">
-              {/* Joystick Lights */}
-              <div className="flex justify-center gap-12 mb-3">
-                {/* Red Lights */}
-                <motion.div
-                  className="w-3 h-3 rounded-full"
-                  style={{ backgroundColor: '#FF2B2B' }}
-                  animate={{ opacity: [0.3, 1, 0.3] }}
-                  transition={{ duration: 1, repeat: Infinity }}
-                />
-                <motion.div
-                  className="w-3 h-3 rounded-full"
-                  style={{ backgroundColor: '#FF2B2B' }}
-                  animate={{ opacity: [0.3, 1, 0.3] }}
-                  transition={{ duration: 1, delay: 0.2, repeat: Infinity }}
-                />
+            {/* Control Deck Section */}
+            <div className="cabinet-controls" style={{ height: '100px' }}>
+              <div className="joystick">
+                <div className="joystick-knob"></div>
               </div>
-
-              {/* Button Lights */}
-              <div className="flex justify-center gap-2">
-                {['#00F5D4', '#FFD700', '#9B5DE5', '#FF2B2B'].map((color, i) => (
-                  <motion.div
-                    key={i}
-                    className="w-2 h-2 rounded-full"
-                    style={{ backgroundColor: color }}
-                    animate={{ opacity: [0.3, 1, 0.3] }}
-                    transition={{ duration: 0.8, delay: i * 0.15, repeat: Infinity }}
-                  />
-                ))}
+              <div className="control-buttons">
+                <div className="button red"></div>
+                <div className="button green"></div>
+                <div className="button blue"></div>
               </div>
             </div>
 
-            {/* Bottom Section - Register Button */}
-            <div className="absolute bottom-0 left-0 right-0 p-6 z-30">
-              <motion.button
+            {/* Cabinet Base / Kickplate */}
+            <div className="cabinet-base">
+              <div className="coin-door">
+                <div className="coin-slot-row">
+                  <div className="coin-door-light amber"></div>
+                  <div className="coin-door-light cyan"></div>
+                </div>
+              </div>
+
+              <button
                 onClick={handleSubmit}
                 disabled={isSubmitting}
-                className="w-full py-3 px-4 font-retro text-sm tracking-widest uppercase font-bold rounded-lg transition-all duration-300"
+                className="master-register-btn"
                 style={{
-                  backgroundColor: '#FF2B2B',
-                  color: 'white',
-                  boxShadow: isSubmitting ? 'none' : '0 0 30px rgba(255,43,43,0.6)',
-                  border: '2px solid #FF2B2B',
+                  position: 'relative',
+                  bottom: 'auto',
+                  left: 'auto',
+                  transform: 'none',
+                  marginTop: '10px',
+                  padding: '10px 30px',
+                  fontSize: '0.9rem'
                 }}
-                whileHover={!isSubmitting ? { 
-                  scale: 1.05,
-                  boxShadow: '0 0 50px rgba(255,43,43,0.8)'
-                } : {}}
-                whileTap={{ scale: 0.98 }}
               >
                 {isSubmitting ? 'PROCESSING' : 'REGISTER'}
-              </motion.button>
+              </button>
             </div>
           </div>
         </motion.div>
@@ -344,4 +302,3 @@ const EventRegistration = () => {
 };
 
 export default EventRegistration;
-

@@ -6,7 +6,7 @@ import Navbar from '@/components/Navbar';
 import ParticleBackground from '@/components/ParticleBackground';
 import ArcadeCard from '@/components/ArcadeEventCard';
 import GlitchText from '@/components/GlitchText';
-
+import ArcadeMachineCategory from '@/components/ArcadeMachineCategory';
 const technicalEvents = [
   {
     id: 'tech-1',
@@ -751,12 +751,12 @@ const Events = () => {
             <p className="text-xs md:text-sm text-neon-red tracking-[0.3em] uppercase mb-4 font-retro">
               CHOOSE YOUR PATH
             </p>
-            
+
             <GlitchText
               text="EVENT CATEGORIES"
               className="text-4xl md:text-6xl lg:text-7xl mb-4"
             />
-            
+
             {/* Decorative lines */}
             <div className="flex flex-col items-center gap-2 mb-8">
               <div className="w-32 md:w-48 h-1 bg-gradient-to-r from-transparent via-neon-red to-transparent shadow-glow-red" />
@@ -814,72 +814,40 @@ const Events = () => {
           </motion.div>
 
           {/* Category Cards Grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-16 w-full">
-            {categories.map((category, index) => (
-              <motion.button
-                key={category.id}
-                onClick={() => handleCategoryClick(category.id)}
-                initial={{ opacity: 0, y: 40, scale: 0.9 }}
-                whileInView={{ opacity: 1, y: 0, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.15, duration: 0.5 }}
-                className="text-left w-full focus:outline-none"
-              >
-                <motion.div
-                  className={`group relative overflow-hidden rounded-xl border transition-all duration-500 cursor-pointer h-80 w-full p-8 ${category.borderColor}`}
-                  whileHover={{
-                    y: -8,
-                    boxShadow: '0 20px 25px rgba(0, 0, 0, 0.5)',
-                  }}
-                >
-                  {/* Background Gradient */}
-                  <div
-                    className={`absolute inset-0 bg-gradient-to-br ${category.color} opacity-10 group-hover:opacity-20 transition-all duration-500`}
-                  />
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-16 w-full">
+            {categories.map((category, index) => {
+              // Map the icon from ReactNode to LucideIcon type if possible, 
+              // but since categories.icon is already a ReactNode in the file, 
+              // I'll extract the type or just pass it if it works.
+              // Actually ArcadeMachineCategory expects icon: LucideIcon.
+              // I will map the category ID to the Lucide component.
+              const IconComp = category.id === 'technical' ? Code :
+                category.id === 'cultural' ? Music :
+                  category.id === 'esports' ? Gamepad2 :
+                    category.id === 'sports' ? Palette : Code;
 
-                  {/* Dark overlay */}
-                  <div className="absolute inset-0 bg-black/50 backdrop-blur-sm group-hover:bg-black/40 transition-all duration-500" />
+              const colorMap: Record<string, 'red' | 'purple' | 'cyan' | 'magenta'> = {
+                technical: 'purple',
+                cultural: 'red',
+                esports: 'cyan',
+                sports: 'magenta'
+              };
 
-                  {/* Content */}
-                  <div className="relative z-10 h-full flex flex-col justify-between">
-                    <div>
-                      <motion.div
-                        className={`inline-flex p-3 rounded-lg bg-gradient-to-br ${category.color} mb-4 group-hover:shadow-lg transition-all duration-300`}
-                        whileHover={{ scale: 1.1 }}
-                      >
-                        <div className="text-white">{category.icon}</div>
-                      </motion.div>
-
-                      <h3
-                        className={`font-heading text-2xl md:text-3xl mb-2 bg-gradient-to-r ${category.color} bg-clip-text text-transparent`}
-                      >
-                        {category.title}
-                      </h3>
-
-                      <p className="text-sm md:text-base text-gray-200">
-                        {category.description}
-                      </p>
-                    </div>
-
-                    <motion.div
-                      className="flex items-center justify-between"
-                      whileHover={{ x: 5 }}
-                    >
-                      <span className="text-xs md:text-sm font-display tracking-widest text-gray-300">
-                        {category.count} EVENTS
-                      </span>
-
-                      <motion.div
-                        className={`p-2 rounded-full border bg-gradient-to-r ${category.color}`}
-                        whileHover={{ scale: 1.2, rotate: 90 }}
-                      >
-                        <ChevronRight size={20} className="text-white" />
-                      </motion.div>
-                    </motion.div>
-                  </div>
-                </motion.div>
-              </motion.button>
-            ))}
+              return (
+                <ArcadeMachineCategory
+                  key={category.id}
+                  title={category.title}
+                  description={category.description}
+                  icon={IconComp as any}
+                  color={colorMap[category.id] || 'red'}
+                  imageUrl={category.id === 'technical' ? 'https://images.unsplash.com/photo-1517694712202-14dd9538aa97' :
+                    category.id === 'cultural' ? 'https://images.unsplash.com/photo-1511379938547-c1f69b13d835' :
+                      category.id === 'esports' ? 'https://images.unsplash.com/photo-1538481143235-c8f91d7a51d2' :
+                        'https://images.unsplash.com/photo-1461896836934-ffe607ba8211'}
+                  onClick={() => handleCategoryClick(category.id)}
+                />
+              );
+            })}
           </div>
 
           {/* Section Divider */}
@@ -920,7 +888,7 @@ const Events = () => {
               {/* Horizontal Carousel */}
               <div className="relative w-full overflow-hidden">
                 <motion.div
-                  className="flex gap-12 w-full"
+                  className="flex gap-16 w-full"
                   animate={{ x: [0, -100 * technicalEvents.length * 2] }}
                   transition={{
                     duration: 60,
@@ -931,7 +899,7 @@ const Events = () => {
                   {[...technicalEvents.slice(0, 5), ...technicalEvents.slice(0, 5)].map((event, idx) => (
                     <motion.div
                       key={`tech-${idx}`}
-                      className="flex-shrink-0 w-72"
+                      className="flex-shrink-0 w-[320px]"
                       whileHover={{ scale: 1.05, y: -10 }}
                     >
                       <ArcadeCard
@@ -973,7 +941,7 @@ const Events = () => {
               {/* Horizontal Carousel */}
               <div className="relative w-full overflow-hidden">
                 <motion.div
-                  className="flex gap-12 w-full"
+                  className="flex gap-16 w-full"
                   animate={{ x: [0, -100 * esportsEvents.length * 2] }}
                   transition={{
                     duration: 60,
@@ -984,7 +952,7 @@ const Events = () => {
                   {[...esportsEvents.slice(0, 5), ...esportsEvents.slice(0, 5)].map((event, idx) => (
                     <motion.div
                       key={`esports-${idx}`}
-                      className="flex-shrink-0 w-72"
+                      className="flex-shrink-0 w-[320px]"
                       whileHover={{ scale: 1.05, y: -10 }}
                     >
                       <ArcadeCard
@@ -1026,7 +994,7 @@ const Events = () => {
               {/* Horizontal Carousel */}
               <div className="relative w-full overflow-hidden">
                 <motion.div
-                  className="flex gap-12 w-full"
+                  className="flex gap-16 w-full"
                   animate={{ x: [0, -100 * culturalEvents.length * 2] }}
                   transition={{
                     duration: 60,
@@ -1037,7 +1005,7 @@ const Events = () => {
                   {[...culturalEvents.slice(0, 5), ...culturalEvents.slice(0, 5)].map((event, idx) => (
                     <motion.div
                       key={`cultural-${idx}`}
-                      className="flex-shrink-0 w-72"
+                      className="flex-shrink-0 w-[320px]"
                       whileHover={{ scale: 1.05, y: -10 }}
                     >
                       <ArcadeCard
@@ -1079,7 +1047,7 @@ const Events = () => {
               {/* Horizontal Carousel */}
               <div className="relative w-full overflow-hidden">
                 <motion.div
-                  className="flex gap-12 w-full"
+                  className="flex gap-16 w-full"
                   animate={{ x: [0, -100 * sportsEvents.length * 2] }}
                   transition={{
                     duration: 60,
@@ -1090,7 +1058,7 @@ const Events = () => {
                   {[...sportsEvents.slice(0, 5), ...sportsEvents.slice(0, 5)].map((event, idx) => (
                     <motion.div
                       key={`sports-${idx}`}
-                      className="flex-shrink-0 w-72"
+                      className="flex-shrink-0 w-[320px]"
                       whileHover={{ scale: 1.05, y: -10 }}
                     >
                       <ArcadeCard

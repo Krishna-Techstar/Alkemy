@@ -1,4 +1,59 @@
-@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Orbitron:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&family=VT323&family=Space+Grotesk:wght@300;400;500;600;700&family=Libre+Baskerville:wght@400;700&display=swap');
+/* ITC Benguial Font Faces */
+@font-face {
+  font-family: 'ITC Benguiat';
+  src: url('/itc-benguiat-std/ITCBenguiatStdBookCn.OTF') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'ITC Benguiat';
+  src: url('/itc-benguiat-std/ITCBenguiatStdBookCnIt.OTF') format('opentype');
+  font-weight: normal;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'ITC Benguiat';
+  src: url('/itc-benguiat-std/ITCBenguiatStdMediumCn.OTF') format('opentype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'ITC Benguiat';
+  src: url('/itc-benguiat-std/ITCBenguiatStdMediumCnIt.OTF') format('opentype');
+  font-weight: 500;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'ITC Benguiat';
+  src: url('/itc-benguiat-std/ITCBenguiatStdBoldCn.OTF') format('opentype');
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'ITC Benguiat';
+  src: url('/itc-benguiat-std/ITCBenguiatStdBoldCnIt.OTF') format('opentype');
+  font-weight: bold;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'ITC Benguiat Bold';
+  src: url('/itc-benguiat-bold/ITC Benguiat Bold/ITC Benguiat Bold.otf') format('opentype');
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
 
 @tailwind base;
 @tailwind components;
@@ -60,8 +115,9 @@
     --glow-cyan-intense: 0 0 30px hsla(168, 100%, 48%, 0.8), 0 0 60px hsla(168, 100%, 48%, 0.3);
     
     /* Glass Effect */
-    --glass-bg: hsla(230, 54%, 6%, 0.55);
-    --glass-border: hsla(0, 0%, 100%, 0.08);
+    --glass-bg: rgba(255, 255, 255, 0.08);
+    --glass-border: rgba(255, 255, 255, 0.15);
+    --glass-backdrop: rgba(0, 0, 0, 0.2);
     
     /* Gradients */
     --gradient-hero-overlay: linear-gradient(180deg, hsla(228, 60%, 4%, 0.85), hsla(0, 0%, 0%, 0.95));
@@ -92,12 +148,12 @@
   
   body {
     @apply bg-background text-foreground antialiased;
-    font-family: 'Inter', 'Space Grotesk', sans-serif;
+    font-family: 'ITC Benguiat', 'ITC Benguiat Bold', serif;
     overflow-x: hidden;
   }
   
   h1, h2, h3, h4, h5, h6 {
-    font-family: 'Bebas Neue', 'Orbitron', sans-serif;
+    font-family: 'ITC Benguiat Bold', 'ITC Benguiat', serif;
     letter-spacing: 0.12em;
     text-transform: uppercase;
   }
@@ -139,8 +195,27 @@
   .glass-panel {
     background: var(--glass-bg);
     backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
     border: 1px solid var(--glass-border);
     border-radius: var(--radius);
+  }
+  
+  /* Navbar Glassmorphism */
+  .navbar-glass {
+    background: linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.1) 0%,
+      rgba(255, 255, 255, 0.05) 50%,
+      rgba(255, 255, 255, 0.08) 100%
+    );
+    backdrop-filter: blur(16px) saturate(180%);
+    -webkit-backdrop-filter: blur(16px) saturate(180%);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.25);
+    box-shadow: 
+      0 8px 32px rgba(0, 0, 0, 0.12),
+      0 4px 16px rgba(0, 0, 0, 0.08),
+      inset 0 1px 0 rgba(255, 255, 255, 0.15);
   }
   
   /* Arcade Frame */
@@ -183,7 +258,7 @@
   
   /* Retro Label */
   .retro-label {
-    font-family: 'VT323', monospace;
+    font-family: 'ITC Benguiat', serif;
     font-size: 0.875rem;
     letter-spacing: 0.15em;
     text-transform: uppercase;
@@ -191,7 +266,7 @@
   
   /* HUD Label */
   .hud-label {
-    font-family: 'Orbitron', sans-serif;
+    font-family: 'ITC Benguiat', serif;
     font-size: 0.75rem;
     font-weight: 500;
     letter-spacing: 0.2em;
